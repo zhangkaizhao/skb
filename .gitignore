@@ -1,4 +1,4 @@
-bin/
-lib/
-pages/
-settings.yml
+/bin
+/lib
+/pages
+/settings.yml

@@ -79,8 +79,15 @@ class Page
     File.new(path).info.size.zero?
   end
 
-  def to_html
-    Markd.to_html(markdown)
+  def markdown
+    @markdown ||= begin
+                    if content.lines.first.rstrip == YAML_BOUNDARY
+                      _, _, markdown = content.split(YAML_BOUNDARY, 3)
+                    else
+                      markdown = content
+                    end
+                    markdown
+                  end
   end
 
   private def content
@@ -94,17 +101,6 @@ class Page
                   else
                     # {} of YAML::Any => YAML::Any
                     Metadata.from_yaml("")
-                  end
-  end
-
-  private def markdown
-    @markdown ||= begin
-                    if content.lines.first.rstrip == YAML_BOUNDARY
-                      _, _, markdown = content.split(YAML_BOUNDARY, 3)
-                    else
-                      markdown = content
-                    end
-                    markdown
                   end
   end
 end

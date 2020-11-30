@@ -1,4 +1,6 @@
 class PageController < ApplicationController
+  include HeadingLinkerHelper
+  include TextConverterHelper
 
   def index
     pages = Page.all.sort { |a, b| a.name <=> b.name }
