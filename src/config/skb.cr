@@ -3,32 +3,14 @@ require "yaml"
 module Amber::Environment
   class Settings
     class Skb
-      YAML.mapping(
-        author: {
-          type: String,
-          default: "Some One",
-        },
-        author_url: {
-          type: String,
-          default: "http://example.com/",
-        },
-        copyright_start_year: {
-          type: Int32,
-          default: 2020,
-        },
-        name: {
-          type: String,
-          default: "Site Name",
-        },
-        domain: {
-          type: String,
-          default: "example.com",
-        },
-        tagline: {
-          type: String,
-          default: "A short tagline",
-        },
-      )
+      include YAML::Serializable
+
+      property author : String = "Some One"
+      property author_url : String = "http://example.com/"
+      property copyright_start_year : Int32 = 2020
+      property name : String = "Site Name"
+      property domain : String = "example.com"
+      property tagline : String = "A short tagline"
     end
 
     property skb : Skb?

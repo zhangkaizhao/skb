@@ -7,11 +7,11 @@ class Page
   class NotFound < Exception; end
 
   class Metadata
-    YAML.mapping(
-      title: String?,
-      tags: Array(String)?,
-      hidden: Bool?,
-    )
+    include YAML::Serializable
+
+    property title : String?
+    property tags : Array(String)?
+    property hidden : Bool?
   end
 
   YAML_BOUNDARY = "---"
