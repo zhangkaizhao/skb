@@ -5,10 +5,8 @@ authors:
   - Kaizhao Zhang <zhangkaizhao@gmail.com>
 
 targets:
-  amber:
-    main: lib/amber/src/amber/cli.cr
   skb:
-    main: app/skb.cr
+    main: src/skb.cr
 
 crysal: 0.35.1
 
