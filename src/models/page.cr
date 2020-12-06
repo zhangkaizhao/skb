@@ -47,7 +47,7 @@ class Page
   def self.recently_modified(limit=10, basepath=Path.new("./pages"))
     all
       .sort { |a, b| b.modification_time <=> a.modification_time }
-      .take(limit)
+      .first(limit)
   end
 
   def initialize(name, basepath = Path.new("./pages"))

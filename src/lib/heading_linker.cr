@@ -3,8 +3,6 @@ require "uri"
 require "xml"
 
 class HeadingLinker
-  HTML_PARSER_OPTIONS = XML::HTMLParserOptions.default | XML::HTMLParserOptions::NODEFDTD
-  XML_SAVE_OPTIONS = XML::SaveOptions::FORMAT | XML::SaveOptions::AS_HTML
 
   property doc : XML::Node
 
@@ -14,8 +12,8 @@ class HeadingLinker
   def link_headings!
     add_anchors_to_headers!
     # XXX escaped HTML. How to append children nodes?
-    content = HTML.unescape(doc.to_xml(options: XML_SAVE_OPTIONS))
-    doc = XML.parse_html(content, options: HTML_PARSER_OPTIONS)
+    content = HTML.unescape(doc.to_xml(options: XMLOptions::XML_SAVE_OPTIONS))
+    doc = XML.parse_html(content, options: XMLOptions::HTML_PARSER_OPTIONS)
   end
 
   private def add_anchors_to_headers!

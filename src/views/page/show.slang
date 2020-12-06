@@ -5,7 +5,7 @@ article
   h1
     == link_to page.title, "/#{page.name}", class: "no-decoration"
 
-  == link_headings(markdown_to_html(page.markdown))
+  == process_custom_elements(link_headings(markdown_to_html(page.markdown)))
 
   div.smaller-font.lighten.shaded-panel
     p Last modified at:
