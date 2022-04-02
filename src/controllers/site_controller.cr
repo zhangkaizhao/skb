@@ -5,22 +5,22 @@ class SiteController < ApplicationController
     pages = Page.all
     tags = Tag.all
 
-    sitemaps = Sitemapper.build do
-      add(
+    sitemaps = Sitemapper.build do |builder|
+      builder.add(
         "/",
         lastmod: home.modification_time,
         changefreq: "weekly",
         priority: 0.9
       )
 
-      add(
+      builder.add(
         "/pages",
         lastmod: pages.map(&.modification_time).max,
         changefreq: "weekly",
         priority: 0.9
       )
 
-      add(
+      builder.add(
         "/tags",
         lastmod: tags.map(&.last_modified).max,
         changefreq: "weekly",
@@ -28,7 +28,7 @@ class SiteController < ApplicationController
       )
 
       pages.each do |page|
-        add(
+        builder.add(
           "/#{page.name}",
           lastmod: page.modification_time,
           changefreq: "weekly",
@@ -37,7 +37,7 @@ class SiteController < ApplicationController
       end
 
       tags.each do |tag|
-        add(
+        builder.add(
           "/tags/#{tag.name}",
           lastmod: tag.last_modified,
           changefreq: "weekly",

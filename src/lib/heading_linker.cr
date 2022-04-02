@@ -18,7 +18,7 @@ class HeadingLinker
 
   private def add_anchors_to_headers!
     doc.xpath_nodes("//h1 | //h2 | //h3 | //h4 | //h5 | //h6").each do |heading|
-      identifier = URI.encode(heading.text)
+      identifier = URI.encode_path(heading.text)
 
       hstr = XML.build_fragment do |xml|
           xml.element("a", id: identifier, class: "anchor", href: "##{identifier}") do
